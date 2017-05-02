@@ -1,0 +1,20 @@
+#!/bin/bash
+function localizer {
+	echo "全局变量的a是${a}"
+	#声明局部变量
+	local a="local a"
+	echo "局部变量a是$a"
+}
+
+a="global a"
+
+#调用函数
+localizer
+echo "调用完函数后的a是$a"
+
+
+
+
+
+
+

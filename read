@@ -1,0 +1,12 @@
+#!/bin/bash
+# -n 消除了通常的换行符
+echo -n "enter your name:"
+read user_name
+if [ -n "$user_name" ];then
+	echo $user_name;
+	exit 0
+else
+	echo "you do not enter username"
+	exit 1
+fi
+

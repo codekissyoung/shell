@@ -1,0 +1,5 @@
+#!/bin/bash
+for script in *
+do
+	echo $script
+done
