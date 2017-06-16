@@ -1,0 +1,14 @@
+#!/bin/bash
+a=1
+case $a in
+0)
+echo "就是0嘛"
+;;
+1)
+echo "就是1嘛"
+echo "再输出一句"
+;;
+*)
+echo "就是其他嘛"
+;;
+esac
