@@ -1,5 +1,15 @@
 #!/bin/bash
-for script in *
-do
+list="abc bcd cdf"
+for var in $list ; do
+	echo "var : $var"
+done
+
+
+for var in `cat /etc/passwd`; do
+	echo "$var";
+done
+
+
+for script in /etc/*d ; do
 	echo $script
 done
