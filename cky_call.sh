@@ -1,0 +1,6 @@
+#!/bin/bash
+. cky.sh
+
+
+
+
