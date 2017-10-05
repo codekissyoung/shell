@@ -88,6 +88,13 @@ if [[ ${USER} == c* ]]; then
 fi
 echo;
 
+echo "使用while-then命令来重复执行";
+var1=3
+while [ ${var1} -gt 0 ];do
+    echo "Now var1 is ${var1}";
+    var1=$[ ${var1} - 1 ]
+done
+echo
 
 echo "使用 for-do-list 循环操作";
 old_IFS=${IFS};
@@ -105,8 +112,12 @@ for file in ${this_dir}/*; do
         echo "${file}  is a directory !"
     fi
 done
+echo;
 
-
+echo "for-do-list c语言风格的循环";
+for (( i=1; i <= 3; i++ )); do
+    echo "The Text Number is ${i}";
+done
 
 
 
