@@ -97,19 +97,34 @@ done
 echo
 
 echo "使用 for-do-list 循环操作";
-old_IFS=${IFS};
+IFS_OLD=${IFS};
 IFS=$' '; # 设置IFS , 只使用 空格 来分割列表数据
 for i in "Apple" "Orange" "Dog"; do
     echo ${i}
 done
-IFS=${old_IFS}
+IFS=${IFS_OLD}
 echo;
+
+echo "非常重要的 IFS 变量, 它就是 列表的分隔符";
+IFS_OLD=${IFS}
+IFS=$'\n'
+for entry in $(cat /etc/passwd); do
+    IFS=:
+    for value in ${entry};do
+        echo -n " ( ${value} )"
+    done
+    echo
+    break;  # 为了输出短些 跑一次说明意思就够了
+done
+IFS=${IFS_OLD}
+echo
 
 echo "for-do-list读取目录";
 this_dir=`pwd`;
 for file in ${this_dir}/*; do
     if [ -d "${file}" ];then
         echo "${file}  is a directory !"
+        break; # 输出第一次 目录就够了 不要输出那么多内容
     fi
 done
 echo;
