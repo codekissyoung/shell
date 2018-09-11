@@ -9,12 +9,14 @@ echo "用户ID : $UID";
 echo $!
 echo $_
 
-bar(){
+bar()
+{
 	echo 'bar called';
 	caller 0
 }
 
-call_function(){
+call_function()
+{
 	bar;
 }
 
