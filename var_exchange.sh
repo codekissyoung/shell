@@ -44,25 +44,3 @@ echo ${file:=default_var} # file空值或者没设置，则使用default_var作�
 echo ${file?default_var}  # file没设定，则将default_var输出至STDERR
 echo ${file:?default_var} # file没设定或者空值，则将default_var输出至STDERR
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
