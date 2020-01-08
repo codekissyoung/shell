@@ -1,0 +1,41 @@
+---
+- name: Configure webserver with nginx
+  hosts: linkWeb
+  vars:
+    nginx_path: /etc/nginx
+    ssl_path: /etc/nginx/ssl
+    key_file: /etc/nginx/ssl/nginx.key
+    cert_file: /etc/nginx/ssl/nginx.cert
+    www_path: /var/www/html
+    server_name: a.cky.com
+  tasks:
+    - name: install nginx
+      apt: name=nginx update_cache=yes cache_valid_time=3600
+    - name: set nginx configuration
+      template: >
+        src=templates/nginx.conf.j2
+        dest={{ nginx_path }}/sites-available/default
+        owner=root mode=0600
+      notify: restart nginx # 与 handlers 中 restart nginx 对应
+    - name: enable nginx configuration
+      file: >
+        src={{ nginx_path }}/sites-available/default
+        dest={{ nginx_path }}/sites-enabled/default
+        state=link
+      notify: restart nginx # 与 handlers 中 restart nginx 对应
+    - name: create dir for ssl certificates
+      file: path={{ ssl_path }} state=directory
+    - name: copy TLS key
+      copy: src=files/nginx.key dest={{ key_file }} owner=root mode=0600
+    - name: copy TLS certificate
+      copy: src=files/nginx.crt dest={{ cert_file }}
+      notify: restart nginx
+    - name: copy index.html
+      template: >
+        src=templates/index.html.j2
+        dest={{ www_path }}/index.html
+        mode=0644
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted
+...
